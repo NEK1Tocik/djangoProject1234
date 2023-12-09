@@ -13,6 +13,7 @@ import re
 logging.basicConfig(level=logging.INFO)
 
 storage = MemoryStorage()
+
 bot = Bot(token="6962649279:AAGoi8O6jUjTUV5j-Seh7NcCwEdiW5d2na0")
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
@@ -59,56 +60,56 @@ class DataSales:
 
 
 user_but = ReplyKeyboardMarkup(resize_keyboard=True)
-user_but.add(KeyboardButton(text='регистрация'), KeyboardButton(text='выход'))
+user_but.add(KeyboardButton(text='Регистрация'), KeyboardButton(text='Выход'))
 
 
 @dp.message_handler(commands='start')
 async def cmd_end(mes: types.Message):
-    await mes.reply(f'{mes.from_user.first_name}, воспользуйтесь кнопками для дальнейших действий',
+    await mes.reply(f'Привет {mes.from_user.first_name}, я бот который поможет тебе зарегестрироваться. Воспользуйся кнопками чтобы продолжить :)',
                     reply_markup=user_but)
 
 
-@dp.message_handler(text='выход')
+@dp.message_handler(text='Выход')
 async def exit_bot(mes: types.Message):
     user_inl1 = InlineKeyboardMarkup()
-    user_inl1.add(InlineKeyboardButton('вернуться на сайт', url='http://127.0.0.1:8000/info/'))
-    await mes.reply('выход', reply_markup=user_inl1)
+    user_inl1.add(InlineKeyboardButton('Вернуться на сайт', url='http://127.0.0.1:8000/info/'))
+    await mes.reply('Выход', reply_markup=user_inl1)
 
 
-@dp.message_handler(text='регистрация')
+@dp.message_handler(text='Регистрация')
 async def cmd_start(mes: types.Message):
-    await mes.answer('введите логин')
+    await mes.answer('Введите логин')
     await States.login.set()
 
 
 @dp.message_handler(state=States.login)
 async def save_login(mes: types.Message, state: FSMContext):
     if len(mes.text) < 2:
-        return await mes.answer('логин не может быть таким коротким')
+        return await mes.answer('Логин не может быть таким коротким. Попробуйте ещё.')
     async with lock:
         DataSales.dt_user['login'] = mes.text
-    await mes.answer('введите email')
+    await mes.answer('Введите email')
     await States.email.set()
 
 
 @dp.message_handler(state=States.email)
 async def save_email(mes: types.Message, state: FSMContext):
     if not isValid(mes.text):
-        return await mes.answer('email введен не корректно')
+        return await mes.answer('email введен не корректно. Попробуйте ещё раз.')
     async with lock:
         DataSales.dt_user['email'] = mes.text
-    await mes.answer('введите пароль')
+    await mes.answer('Введите пароль')
     await States.password.set()
 
 
 @dp.message_handler(state=States.password)
 async def save_password(mes: types.Message, state: FSMContext):
     if len(mes.text) < 5:
-        return await mes.answer('пароль не может быть таким коротким')
+        return await mes.answer('Пароль не может быть таким коротким. Попробуйте ещё раз.')
     async with lock:
         DataSales.dt_user['password'] = mes.text
     await state.finish()
-    await mes.answer('регистрация прошла успешна')
+    await mes.answer('Поздравляю! Регистрация прошла успешна!')
     session.add(Users(DataSales.dt_user["login"], DataSales.dt_user["password"], DataSales.dt_user["email"]))
     session.commit()
 

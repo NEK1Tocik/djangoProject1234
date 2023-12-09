@@ -29,11 +29,11 @@
         }
 
         .sub {
-            background-color: grey;
+            background-color: lightskyblue;
         }
 
         .sub:hover {
-            background-color: darkgreen;
+            background-color: rebeccapurple;
         }
 
         .sub:active {
@@ -47,7 +47,7 @@
     <input type="password" name="password" placeholder="password">
     <input type="password" name="rpassword" placeholder="password">
     <input type="email" name="email" placeholder="email">
-    <input class="sub" type="submit" value="зарегистрироваться">
+    <input class="sub" type="submit" value="Зарегистрироваться">
     {{ err }}
 </form>
 <script>
@@ -58,15 +58,15 @@
 
     form.onsubmit = function () {
         if (login.value.length < 2) {
-            alert('логин слишком короткий')
+            alert('Логин слишком короткий')
             return false
         }
         if (pas.value.length < 5) {
-            alert('пароль слишком простой')
+            alert('Пароль слишком простой')
             return false
         }
         if (pas.value != rpas.value) {
-            alert('пароль не совпадает с подтверждением')
+            alert('Пароль не совпадает с подтверждением')
             return false
         }
     }
