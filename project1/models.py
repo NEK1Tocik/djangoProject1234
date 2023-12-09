@@ -1,13 +1,13 @@
 from django.db import models
 
-class ModelAlex(models.Model):
+class ModelNikita(models.Model):
     name = models.CharField(max_length=10)
     email = models.CharField(max_length=10)
     city = models.CharField(max_length=10)
     prof = models.CharField(max_length=10)
 
 
-class ModelAlexImg(models.Model):
+class ModelNikitaImg(models.Model):
     name = models.CharField(max_length=10)
     img = models.ImageField(upload_to='imgs')
 
