@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 
 storage = MemoryStorage()
 
-bot = Bot(token="6962649279:AAGoi8O6jUjTUV5j-Seh7NcCwEdiW5d2na0")
+bot = Bot(token="YOUR_BOT_TOKEN")
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
 lock = Lock()
