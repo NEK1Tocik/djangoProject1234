@@ -38,7 +38,7 @@ def author(request):
         data = ModelReg.objects.all()
         for i in data:
             if request.POST['email'] == i.email and request.POST['password'] == i.password:
-                return render(request, 'info.html', {'user': f'Автозизация прошла успешно'})
+                return render(request, 'info.html', {'user': f'Авторизация прошла успешно'})
         return render(request, 'index.html', {'err': 'авторизация не пройдена'})
     return render(request, 'author.html')
 
