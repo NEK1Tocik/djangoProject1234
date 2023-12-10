@@ -38,8 +38,8 @@ def author(request):
         data = ModelReg.objects.all()
         for i in data:
             if request.POST['email'] == i.email and request.POST['password'] == i.password:
-                return render(request, 'info.html', {'user': f'Авторизация прошла успешно'})
-        return render(request, 'index.html', {'err': 'авторизация не пройдена'})
+                return render(request, 'info.html', {'user': f'Авторизация прошла успешно. Можешь перейти по ссылкам :)'})
+        return render(request, 'index.html', {'err': 'Возникла ошибка: авторизация не пройдена. Попробуйте ещё'})
     return render(request, 'author.html')
 
 @csrf_exempt
