@@ -12,5 +12,5 @@ urlpatterns = [
     path('info/', views.info),
     path('news/', include('news.urls')),
     path('todo/', include('todo.urls')),
-    path('todo_reg/', include('todo.urls_reg'))
+    path('todo_reg/', include('todo.urls_reg')),
 ]
