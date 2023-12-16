@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 
 storage = MemoryStorage()
 
-bot = Bot(token="YOUR_BOT_TOKEN")
+bot = Bot(token="6962649279:AAGoi8O6jUjTUV5j-Seh7NcCwEdiW5d2na0")
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
 lock = Lock()
@@ -65,7 +65,7 @@ user_but.add(KeyboardButton(text='Регистрация'), KeyboardButton(text=
 
 @dp.message_handler(commands='start')
 async def cmd_end(mes: types.Message):
-    await mes.reply(f'Привет {mes.from_user.first_name}, я бот который поможет тебе зарегестрироваться. Воспользуйся кнопками чтобы продолжить :)',
+    await mes.reply(f'Привет {mes.from_user.first_name}, я бот который поможет тебе зарегистрироваться. Воспользуйся кнопками чтобы продолжить :)',
                     reply_markup=user_but)
 
 
