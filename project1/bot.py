@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 
 storage = MemoryStorage()
 
-bot = Bot(token="6962649279:AAGoi8O6jUjTUV5j-Seh7NcCwEdiW5d2na0")
+bot = Bot(token="YOUR_BOT_TOKEN")
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
 lock = Lock()
@@ -85,7 +85,7 @@ async def cmd_start(mes: types.Message):
 @dp.message_handler(state=States.login)
 async def save_login(mes: types.Message, state: FSMContext):
     if len(mes.text) < 2:
-        return await mes.answer('Логин не может быть таким коротким. Попробуйте ещё.')
+        return await mes.answer('Логин не может быть таким коротким. Попробуйте ещё раз.')
     async with lock:
         DataSales.dt_user['login'] = mes.text
     await mes.answer('Введите email')
@@ -95,7 +95,7 @@ async def save_login(mes: types.Message, state: FSMContext):
 @dp.message_handler(state=States.email)
 async def save_email(mes: types.Message, state: FSMContext):
     if not isValid(mes.text):
-        return await mes.answer('email введен не корректно. Попробуйте ещё раз.')
+        return await mes.answer('Email введен не корректно. Попробуйте ещё раз.')
     async with lock:
         DataSales.dt_user['email'] = mes.text
     await mes.answer('Введите пароль')
@@ -109,7 +109,7 @@ async def save_password(mes: types.Message, state: FSMContext):
     async with lock:
         DataSales.dt_user['password'] = mes.text
     await state.finish()
-    await mes.answer('Поздравляю! Регистрация прошла успешна!')
+    await mes.answer('Поздравляю! Регистрация прошла успешна! Чтобы выйти нажми соответствующую кнопку.')
     session.add(Users(DataSales.dt_user["login"], DataSales.dt_user["password"], DataSales.dt_user["email"]))
     session.commit()
 
